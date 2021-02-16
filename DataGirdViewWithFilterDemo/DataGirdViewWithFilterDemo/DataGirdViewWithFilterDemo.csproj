@@ -46,6 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColumnFilterableClickedEventArg.cs" />
+    <Compile Include="DataGridViewFilterableHeaderCell.cs" />
+    <Compile Include="DataGridViewFilterable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataGridViewFilterable.Designer.cs">
+      <DependentUpon>DataGridViewFilterable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FilterStatus.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +74,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -75,6 +85,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FilterHeaderCellGlyph.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\png-transparent-black-funnel-illustration-computer-icons-filtration-iconfinder-filter-funnel-filter-icon-miscellaneous-angle-photography.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

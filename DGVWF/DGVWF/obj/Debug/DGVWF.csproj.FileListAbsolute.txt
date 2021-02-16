@@ -4,3 +4,9 @@ C:\Users\DartAlex\source\repos\DGVWF\DGVWF\obj\Debug\DGVWF.csprojResolveAssembly
 C:\Users\DartAlex\source\repos\DGVWF\DGVWF\obj\Debug\DGVWF.csproj.CoreCompileInputs.cache
 C:\Users\DartAlex\source\repos\DGVWF\DGVWF\obj\Debug\DGVWF.dll
 C:\Users\DartAlex\source\repos\DGVWF\DGVWF\obj\Debug\DGVWF.pdb
+C:\Users\vvkochan\source\repos\DataGridViewWithFilter\DGVWF\DGVWF\bin\Debug\DGVWF.dll
+C:\Users\vvkochan\source\repos\DataGridViewWithFilter\DGVWF\DGVWF\bin\Debug\DGVWF.pdb
+C:\Users\vvkochan\source\repos\DataGridViewWithFilter\DGVWF\DGVWF\obj\Debug\DGVWF.csproj.CoreCompileInputs.cache
+C:\Users\vvkochan\source\repos\DataGridViewWithFilter\DGVWF\DGVWF\obj\Debug\DGVWF.dll
+C:\Users\vvkochan\source\repos\DataGridViewWithFilter\DGVWF\DGVWF\obj\Debug\DGVWF.pdb
+C:\Users\vvkochan\source\repos\DataGridViewWithFilter\DGVWF\DGVWF\obj\Debug\DGVWF.csprojAssemblyReference.cache

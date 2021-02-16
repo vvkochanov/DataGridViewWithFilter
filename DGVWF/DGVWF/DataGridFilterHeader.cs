@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace DGVWF
 {
@@ -18,9 +19,15 @@ namespace DGVWF
             try
             {
                 Padding dropDownPadding = new Padding(0, 0, 20, 0);
-                this.Style.Padding = Padding.Add(this.InheritedStyle.Padding, dropDownPadding);
+                 if (this.InheritedStyle != null)
+                {
+                    Style.Padding = Padding.Add(this.InheritedStyle.Padding, dropDownPadding);
+                }
             }
-            catch { }
+            catch (NullReferenceException e)
+            {
+                Debug.WriteLine(e.Message);
+            }
             base.OnDataGridViewChanged();
         }
 

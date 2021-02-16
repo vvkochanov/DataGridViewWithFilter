@@ -22,12 +22,18 @@ namespace DataGirdViewWithFilterDemo
             this.Size = new Size(480, 480);
 
             DataGridViewWithFilter DG = new DataGridViewWithFilter();
+            DataGridView DGV1 = new DataGridView();
 
             DG.Bounds = new Rectangle(10, 10, 445, 420);
             DG.Anchor = ((AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Left) | AnchorStyles.Right | AnchorStyles.Bottom)));
             DG.AllowUserToAddRows = false;
 
-            this.Controls.Add(DG);
+            DGV.Bounds = new Rectangle(10, 10, 445, 420);
+            DGV.Anchor = ((AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Left) | AnchorStyles.Right | AnchorStyles.Bottom)));
+            DGV.AllowUserToAddRows = false;
+            
+            //Controls.Add(DG);
+            //Controls.Add(DGV1);
 
             DataTable DT = new DataTable();
             DT.Columns.Add("Number", typeof(int));
@@ -46,7 +52,9 @@ namespace DataGirdViewWithFilterDemo
             DataSet DS = new DataSet();
             DS.Tables.Add(DT);
 
-            DG.DataSource = DS.Tables[0];
+            DGV.DataSource = DS.Tables[0];
+            //DGV.Visible = false;
+            //DGV1.DataSource = DS.Tables[0];
         }
     }
 }
