@@ -5,7 +5,6 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace DataGirdViewWithFilterDemo
@@ -28,7 +27,7 @@ namespace DataGirdViewWithFilterDemo
         string SpaceText = "<Space>";
 
         // Текущий индекс ячейки
-        private int columnIndex { get; set; }
+        private int ColumnIndex { get; set; }
 
         public DataGridViewFilterable()
         {
@@ -40,6 +39,7 @@ namespace DataGirdViewWithFilterDemo
             var header = new DataGridViewFilterableHeaderCell();
             header.FilterButtonClicked += new EventHandler<ColumnFilterableClickedEventArg>(header_FilterButtonClicked);
             e.Column.HeaderCell = header;
+            e.Column.SortMode = DataGridViewColumnSortMode.Programmatic;
 
             base.OnColumnAdded(e);
         }
@@ -55,12 +55,11 @@ namespace DataGirdViewWithFilterDemo
             int widthTool = GetWhithColumn(e.ColumnIndex) + 50;
             if (widthTool < 130) widthTool = 130;
 
-            columnIndex = e.ColumnIndex;
+            ColumnIndex = e.ColumnIndex;
 
             textBoxCtrl.Clear();
             CheckCtrl.Items.Clear();
 
-            //textBoxCtrl.Text = textBoxCtrlText;
             textBoxCtrl.Size = new Size(widthTool, 30);
             textBoxCtrl.TextChanged -= textBoxCtrl_TextChanged;
             textBoxCtrl.TextChanged += textBoxCtrl_TextChanged;
@@ -135,7 +134,7 @@ namespace DataGirdViewWithFilterDemo
                 Size = DateTimeCtrl.Size
             };
 
-            switch (this.Columns[columnIndex].ValueType.ToString())
+            switch (Columns[ColumnIndex].ValueType.ToString())
             {
                 case "System.DateTime":
                     popup.Items.Add(hostForDateTimeCtrl);
@@ -182,12 +181,12 @@ namespace DataGirdViewWithFilterDemo
         // Событие при изменении текста в TextBox
         void textBoxCtrl_TextChanged(object sender, EventArgs e)
         {
-            //if (textBoxCtrl.Text != textBoxCtrlText)       
-            (this.DataSource as DataTable).DefaultView.RowFilter = string.Format("convert([" + this.Columns[columnIndex].Name + "], 'System.String') LIKE '%{0}%'", textBoxCtrl.Text);
+            string filterString = $"convert([{Columns[ColumnIndex].Name}], 'System.String') LIKE '%{textBoxCtrl.Text}%'";
+            (DataSource as DataTable).DefaultView.RowFilter = filterString;
         }
         void DateTimeCtrl_TextChanged(object sender, EventArgs e)
         {
-            (this.DataSource as DataTable).DefaultView.RowFilter = string.Format("convert([" + this.Columns[columnIndex].Name + "], 'System.String') LIKE '%{0}%'", DateTimeCtrl.Text);
+            (DataSource as DataTable).DefaultView.RowFilter = $"convert([{Columns[ColumnIndex].Name}], 'System.String') LIKE '%{DateTimeCtrl.Text}%'";
         }
 
         // Событие кнопки применить
@@ -206,7 +205,7 @@ namespace DataGirdViewWithFilterDemo
             string Value;
 
             // Посик данных в столбце, исключая повторения
-            foreach (DataGridViewRow row in this.Rows)
+            foreach (DataGridViewRow row in Rows)
             {
                 Value = row.Cells[e].Value.ToString();
                 if (Value == "") Value = SpaceText;
@@ -220,19 +219,19 @@ namespace DataGirdViewWithFilterDemo
         // Получаем высоту таблицы
         private int GetHeightTable()
         {
-            return this.Height;
+            return Height;
         }
 
         // Получаем ширину выбранной колонки
         private int GetWhithColumn(int e)
         {
-            return this.Columns[e].Width;
+            return Columns[e].Width;
         }
 
         // Запомнить чекбоксы фильтра
         private void SaveChkFilter()
         {
-            string col = this.Columns[columnIndex].Name;
+            string col = Columns[ColumnIndex].Name;
             string itemChk;
             bool statChk;
 
@@ -255,7 +254,7 @@ namespace DataGirdViewWithFilterDemo
             // Посик сохранённых данных
             foreach (FilterStatus val in Filter)
             {
-                if (this.Columns[columnIndex].Name == val.columnName)
+                if (Columns[ColumnIndex].Name == val.columnName)
                 {
                     if (val.valueString == "") val.valueString = SpaceText;
                     CheckList.Add(new FilterStatus() { columnName = "", valueString = val.valueString, check = val.check });
@@ -263,7 +262,7 @@ namespace DataGirdViewWithFilterDemo
             }
 
             // Поиск данных в таблице
-            foreach (string ValueCell in GetDataColumns(columnIndex))
+            foreach (string ValueCell in GetDataColumns(ColumnIndex))
             {
                 int index = CheckList.FindIndex(item => item.valueString == ValueCell);
                 if (index == -1)
@@ -274,7 +273,7 @@ namespace DataGirdViewWithFilterDemo
 
             CheckCtrl.Items.Add(CheckCtrlAllText, CheckState.Indeterminate);
             // Сортировка
-            switch (this.Columns[columnIndex].ValueType.ToString())
+            switch (Columns[ColumnIndex].ValueType.ToString())
             {
                 case "System.Int32":
                     CheckListSort = CheckList.OrderBy(x => Int32.Parse(x.valueString)).ToList();
@@ -348,7 +347,7 @@ namespace DataGirdViewWithFilterDemo
             //if (e.X < popup.Left)
             //{
             //}
-            Debug.WriteLine(">---<OnColumnHeaderMouseClick>---<");
+            //Debug.WriteLine(">---<OnColumnHeaderMouseClick>---<");
             base.OnColumnHeaderMouseClick(e);
         }
 

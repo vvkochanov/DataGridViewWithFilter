@@ -9,8 +9,8 @@ namespace DataGirdViewWithFilterDemo
         public Rectangle ButtonRectangle { get; private set; }
         public ColumnFilterableClickedEventArg(int colIndex, Rectangle btnRect)
         {
-            this.ColumnIndex = colIndex;
-            this.ButtonRectangle = btnRect;
+            ColumnIndex = colIndex;
+            ButtonRectangle = btnRect;
         }
     }
 }

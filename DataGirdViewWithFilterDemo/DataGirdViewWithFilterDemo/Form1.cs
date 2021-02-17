@@ -19,7 +19,7 @@ namespace DataGirdViewWithFilterDemo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(480, 480);
+            Size = new Size(480, 480);
 
             DataGridViewWithFilter DG = new DataGridViewWithFilter();
             DataGridView DGV1 = new DataGridView();
